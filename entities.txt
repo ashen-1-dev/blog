@@ -1,0 +1,32 @@
+
+------------------------------ Entities for Blog app ------------------------------
+
+1. Post
+    id: int
+    description: text
+    short_description: text
+    author_id: int
+    category_id: int(default: 0)
+
+2. Category
+    id: int
+    title: varchar
+    parent_id: int
+
+3. User
+    id: int
+    first_name: varchar
+    last_name: varchar
+    password: varchar
+    email: varchar(unique)
+    login: varchar(unique)
+    photo_path: varchar
+    birth_date: date
+
+4. Role
+    id: int
+    name: int
+    description: varchar
+
+
+-----------------------------------------------------------------------------------
