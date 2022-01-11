@@ -1,7 +1,6 @@
 <?php
 
-namespace App\Models\User;
-
+namespace App\Models;
 
 use App\Models\Blog\Post;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,13 +10,16 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens;
+    use HasFactory;
+    use Notifiable;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
+
     protected $fillable = [
         'name',
         'email',
@@ -47,12 +49,19 @@ class User extends Authenticatable
 
     public function roles()
     {
-        return $this->belongsToMany(Role::class);
+        return $this->belongsToMany(Role::class)->withTimestamps();
     }
 
     public function posts()
     {
         return $this->hasMany(Post::class);
     }
-}
 
+    public function assignRole($role)
+    {
+        $role = Role::where('name', '=', $role->name)
+            ->get()
+            ->first();
+        return $this->roles()->save($role);
+    }
+}

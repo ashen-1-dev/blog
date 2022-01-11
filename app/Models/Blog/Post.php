@@ -2,7 +2,8 @@
 
 namespace App\Models\Blog;
 
-use App\Models\User\User;
+use App\Models\User;
+use Database\Factories\PostFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,5 +19,10 @@ class Post extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    protected static function newFactory()
+    {
+        return PostFactory::new();
     }
 }

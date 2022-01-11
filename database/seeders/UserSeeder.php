@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Blog\Post;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -29,5 +31,9 @@ class UserSeeder extends Seeder
             'updated_at' => $created_at
         ]);
 
+        User::factory()
+            ->count(100)
+            ->has(Post::factory()->count(3))
+            ->create();
     }
 }
